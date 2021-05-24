@@ -19,3 +19,9 @@ pytest_session.txt
 .cache/
 .pytest_cache
 .coverage
+
+# Repo created by ci_imsim_run.py
+DATA
+
+# IDEs, etc.
+.idea/
