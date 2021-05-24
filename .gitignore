@@ -19,3 +19,10 @@ pytest_session.txt
 .cache/
 .pytest_cache
 .coverage
+
+# Default repo created by ci_imsim_run.py
+# (and custom with same prefix)
+DATA*
+
+# IDEs, etc.
+.idea/
