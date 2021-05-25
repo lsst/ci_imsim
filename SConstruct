@@ -1,7 +1,7 @@
 # -*- python -*-
 import os
 from lsst.sconsUtils import scripts
-from SCons.Script import Environment, SConscript
+from SCons.Script import Environment, SConscript, AlwaysBuild
 
 SConscript(os.path.join(".", "bin.src", "SConscript"))
 # Python-only package
@@ -16,6 +16,7 @@ num_process = GetOption('num_jobs')
 safe_python = os.path.join(PKG_ROOT, "bin", "sip_safe_python.sh")
 command = os.path.join(PKG_ROOT, "bin", "ci_run_imsim.py")
 run_ci = env.Command("DATA", "bin", ["{} {} -j {}".format(safe_python, command, num_process)])
+AlwaysBuild(run_ci)
 
 env.Alias("all", run_ci)
 Default(run_ci)
