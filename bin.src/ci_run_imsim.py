@@ -63,6 +63,9 @@ class QgraphCommand(BaseCommand):
                 "--input", INPUTCOL,
                 "--output", COLLECTION,
                 "-p", "$OBS_LSST_DIR/pipelines/imsim/DRP.yaml#singleFrame,multiVisit",
+                "--config", "deblend:multibandDeblend.useCiLimits=True",
+                "--config", "deblend:multibandDeblend.processSingles=False",
+                "--config", "calibrate:deblend.useCiLimits=True",
                 "--save-qgraph", os.path.join(self.runner.RunDir, QGRAPH_FILE))
         pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
         subprocess.run(pipetask)
