@@ -32,7 +32,7 @@ class QgraphCommand(BaseCommand):
                 "--output", COLLECTION,
                 "-p", PIPELINE,
                 # "--config", "deblend:multibandDeblend.useCiLimits=True",
-                # "--config", "deblend:multibandDeblend.processSingles=False",
+                "--config", "deblend:multibandDeblend.processSingles=False",
                 # "--config", "calibrate:deblend.useCiLimits=True",
                 "--skip-existing",
                 "--save-qgraph", os.path.join(self.runner.RunDir, QGRAPH_FILE))
