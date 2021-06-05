@@ -25,7 +25,7 @@ script_infos = [
 for scripts, target in script_infos:
     command = env.Command(
         target,
-        [x for x in everything],
+        everything[-1] if everything else 'bin',
         " && ".join((
             f"{safe_python} {os.path.join(PKG_ROOT, 'bin', script)} -j {num_process}"
             for script in scripts
