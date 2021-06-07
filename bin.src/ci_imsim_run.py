@@ -21,6 +21,12 @@ ciRunner = CommandRunner(os.environ["CI_IMSIM_DIR"])
 ciRunner.register("butler", 0)(CreateButler)
 
 
+@ciRunner.register("process_multiVisit", 0.5)
+class DummyCommand(BaseCommand):
+    def run(self, currentState: BuildState):
+        pass
+
+
 @ciRunner.register("instrument", index_command := index_command + 1)
 class ImsimRegisterInstrument(RegisterInstrument):
     instrumentName = "lsst.obs.lsst.LsstCamImSim"
@@ -78,6 +84,9 @@ class QgraphCommand(BaseCommand):
                 "--input", INPUTCOL,
                 "--output", COLLECTION,
                 "-p", "$OBS_LSST_DIR/pipelines/imsim/DRP.yaml#singleFrame,multiVisit",
+                # "--config", "deblend:multibandDeblend.useCiLimits=True",
+                # "--config", "deblend:multibandDeblend.processSingles=False",
+                # "--config", "calibrate:deblend.useCiLimits=True",
                 "--skip-existing",
                 "--save-qgraph", os.path.join(self.runner.RunDir, QGRAPH_FILE))
         pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
