@@ -22,18 +22,14 @@ script_infos = [
     (("ci_imsim_run_coaddition.py", "ci_imsim_run_multiVisit.py"), "DATA/LSSTCam-imSim/runs/ci_imsim_4k"),
 ]
 
-for scripts, target in script_infos:
-    command = env.Command(
-        target,
-        everything[-1] if everything else 'bin',
-        " && ".join((
-            f"{safe_python} {os.path.join(PKG_ROOT, 'bin', script)} -j {num_process}"
-            for script in scripts
-        )),
-    )
-    AlwaysBuild(command)
-    everything.append(command)
+command = env.Command(
+    "DATA",
+    "bin",
+    f"{safe_python} {os.path.join(PKG_ROOT, 'bin', 'ci_imsim_run.py')} -j {num_process}"
+)
+AlwaysBuild(command)
 
+everything = [command]
 env.Alias("all", everything)
 Default(everything)
 
