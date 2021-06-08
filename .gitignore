@@ -8,10 +8,11 @@ config.log
 *.pyc
 *_wrap.cc
 *Lib.py
+_eupspkg
 
 # Built by sconsUtils
 version.py
-bin/
+bin/ci_imsim_run.py
 
 # Pytest
 tests/.tests

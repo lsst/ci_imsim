@@ -1,5 +1,3 @@
-#!/software/lsstsw/stack_20210520/conda/miniconda3-py38_4.9.2/envs/lsst-scipipe/bin/python
-
 from argparse import ArgumentParser
 import os
 import subprocess
@@ -47,14 +45,20 @@ class RegisterSkyMapSmall(RegisterSkyMap):
 class ImsimIngestRaws(IngestRaws):
     rawLocation = os.path.join(TESTDATA_DIR, "raw")
 
+    # TODO: Remove when DM-30607 is fixed (needed for MacOS only)
+    def run(self, currentState: BuildState):
+        self.arguments.num_cores, saveCores = '1', self.arguments.num_cores
+        super().run(currentState)
+        self.arguments.num_cores = saveCores
+
 
 @ciRunner.register("define_visits", index_command := index_command + 1)
 class ImsimDefineVisits(DefineVisits):
     instrumentName = INSTRUMENT_NAME
     collectionsName = f"{INSTRUMENT_NAME}/raw/all"
 
+    # TODO: Remove when DM-30607 is fixed
     def run(self, currentState: BuildState):
-        # Limit number of cores until DM-30607 is fixed
         self.arguments.num_cores, saveCores = '1', self.arguments.num_cores
         super().run(currentState)
         self.arguments.num_cores = saveCores
