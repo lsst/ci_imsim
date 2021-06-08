@@ -59,12 +59,6 @@ class ImsimDefineVisits(DefineVisits):
     instrumentName = INSTRUMENT_NAME
     collectionsName = f"{INSTRUMENT_NAME}/raw/all"
 
-    def run(self, currentState: BuildState):
-        # Limit number of cores until DM-30607 is fixed
-        self.arguments.num_cores, saveCores = '1', self.arguments.num_cores
-        super().run(currentState)
-        self.arguments.num_cores = saveCores
-
 
 @ciRunner.register("import_external", index_command := index_command + 1)
 class ImsimBaseButlerImport(ButlerImport):
