@@ -1,0 +1,714 @@
+description: Butler Data Repository Export
+version: 1.0.1
+data:
+- type: collection
+  collection_type: TAGGED
+  name: LSSTCam-imSim/calib
+- type: collection
+  collection_type: RUN
+  name: LSSTCam-imSim/calib/gen2/20220101T000000Z
+  host: null
+  timespan_begin: null
+  timespan_end: null
+- type: collection
+  collection_type: RUN
+  name: LSSTCam-imSim/calib/gen2/20220806T000000Z
+  host: null
+  timespan_begin: null
+  timespan_end: null
+- type: collection
+  collection_type: RUN
+  name: LSSTCam-imSim/calib/gen2/20231201T000000Z
+  host: null
+  timespan_begin: null
+  timespan_end: null
+- type: collection
+  collection_type: TAGGED
+  name: LSSTCam-imSim/raw/all
+- type: collection
+  collection_type: TAGGED
+  name: LSSTCam-imSim/refcats
+- type: collection
+  collection_type: RUN
+  name: refcats/PREOPS-301
+  host: null
+  timespan_begin: null
+  timespan_end: null
+- type: collection
+  collection_type: RUN
+  name: skymaps
+  host: null
+  timespan_begin: null
+  timespan_end: null
+- type: collection
+  collection_type: CHAINED
+  name: LSSTCam-imSim/defaults
+  doc: Datasets used by ci_imsim (from testdata_ci_imsim)
+  children:
+  - LSSTCam-imSim/raw/all
+  - LSSTCam-imSim/calib
+  - skymaps
+  - LSSTCam-imSim/refcats
+- type: dataset_type
+  name: bias
+  dimensions:
+  - instrument
+  - detector
+  storage_class: ExposureF
+  is_calibration: true
+- type: dataset
+  dataset_type: bias
+  run: LSSTCam-imSim/calib/gen2/20220101T000000Z
+  records:
+  - dataset_id:
+    - 33317540
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 13
+    path: CALIB/bias/2022-01-01/bias-R02-S11-det013_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317392
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 14
+    path: CALIB/bias/2022-01-01/bias-R02-S12-det014_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317432
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 26
+    path: CALIB/bias/2022-01-01/bias-R03-S22-det026_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317547
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 36
+    path: CALIB/bias/2022-01-01/bias-R11-S00-det036_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317420
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 37
+    path: CALIB/bias/2022-01-01/bias-R11-S01-det037_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317554
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 48
+    path: CALIB/bias/2022-01-01/bias-R12-S10-det048_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317414
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 51
+    path: CALIB/bias/2022-01-01/bias-R12-S20-det051_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317468
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 54
+    path: CALIB/bias/2022-01-01/bias-R13-S00-det054_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317398
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 55
+    path: CALIB/bias/2022-01-01/bias-R13-S01-det055_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317387
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 76
+    path: CALIB/bias/2022-01-01/bias-R20-S11-det076_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317544
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 82
+    path: CALIB/bias/2022-01-01/bias-R21-S01-det082_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317493
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 99
+    path: CALIB/bias/2022-01-01/bias-R23-S00-det099_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317489
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 130
+    path: CALIB/bias/2022-01-01/bias-R31-S11-det130_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317415
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 138
+    path: CALIB/bias/2022-01-01/bias-R32-S10-det138_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317486
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 141
+    path: CALIB/bias/2022-01-01/bias-R32-S20-det141_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317462
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 161
+    path: CALIB/bias/2022-01-01/bias-R34-S22-det161_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+- type: dataset_type
+  name: cal_ref_cat_2_2
+  dimensions:
+  - htm7
+  storage_class: SimpleCatalog
+  is_calibration: false
+- type: dataset
+  dataset_type: cal_ref_cat_2_2
+  run: refcats/PREOPS-301
+  records:
+  - dataset_id:
+    - 3653903
+    data_id:
+    - htm7: 147077
+    path: ref_cats/cal_ref_cat/147077.fits
+    formatter: lsst.obs.base.formatters.fitsGeneric.FitsGenericFormatter
+  - dataset_id:
+    - 3654186
+    data_id:
+    - htm7: 147079
+    path: ref_cats/cal_ref_cat/147079.fits
+    formatter: lsst.obs.base.formatters.fitsGeneric.FitsGenericFormatter
+- type: dataset_type
+  name: dark
+  dimensions:
+  - instrument
+  - detector
+  storage_class: ExposureF
+  is_calibration: true
+- type: dataset
+  dataset_type: dark
+  run: LSSTCam-imSim/calib/gen2/20220101T000000Z
+  records:
+  - dataset_id:
+    - 33318779
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 13
+    path: CALIB/dark/2022-01-01/dark-R02-S11-det013_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318721
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 14
+    path: CALIB/dark/2022-01-01/dark-R02-S12-det014_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318866
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 26
+    path: CALIB/dark/2022-01-01/dark-R03-S22-det026_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318869
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 36
+    path: CALIB/dark/2022-01-01/dark-R11-S00-det036_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318792
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 37
+    path: CALIB/dark/2022-01-01/dark-R11-S01-det037_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318710
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 48
+    path: CALIB/dark/2022-01-01/dark-R12-S10-det048_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318768
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 51
+    path: CALIB/dark/2022-01-01/dark-R12-S20-det051_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318701
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 54
+    path: CALIB/dark/2022-01-01/dark-R13-S00-det054_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318843
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 55
+    path: CALIB/dark/2022-01-01/dark-R13-S01-det055_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318862
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 76
+    path: CALIB/dark/2022-01-01/dark-R20-S11-det076_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318737
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 82
+    path: CALIB/dark/2022-01-01/dark-R21-S01-det082_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318741
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 99
+    path: CALIB/dark/2022-01-01/dark-R23-S00-det099_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318734
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 130
+    path: CALIB/dark/2022-01-01/dark-R31-S11-det130_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318817
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 138
+    path: CALIB/dark/2022-01-01/dark-R32-S10-det138_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318697
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 141
+    path: CALIB/dark/2022-01-01/dark-R32-S20-det141_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318772
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 161
+    path: CALIB/dark/2022-01-01/dark-R34-S22-det161_2022-01-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+- type: dataset_type
+  name: flat
+  dimensions:
+  - band
+  - instrument
+  - detector
+  - physical_filter
+  storage_class: ExposureF
+  is_calibration: true
+- type: dataset
+  dataset_type: flat
+  run: LSSTCam-imSim/calib/gen2/20220806T000000Z
+  records:
+  - dataset_id:
+    - 33317851
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 48
+      physical_filter: g_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R12-S10-det048_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317757
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 51
+      physical_filter: g_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R12-S20-det051_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317878
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 54
+      physical_filter: g_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R13-S00-det054_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317707
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 26
+      physical_filter: i_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R03-S22-det026_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317628
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 54
+      physical_filter: i_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R13-S00-det054_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33317576
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 138
+      physical_filter: i_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R32-S10-det138_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318007
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 54
+      physical_filter: r_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R13-S00-det054_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318124
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 99
+      physical_filter: r_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R23-S00-det099_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318062
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 161
+      physical_filter: r_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R34-S22-det161_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318298
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 13
+      physical_filter: u_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R02-S11-det013_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318312
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 14
+      physical_filter: u_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R02-S12-det014_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318198
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 82
+      physical_filter: u_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R21-S01-det082_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318495
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 55
+      physical_filter: y_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R13-S01-det055_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318379
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 130
+      physical_filter: y_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R31-S11-det130_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318479
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 141
+      physical_filter: y_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R32-S20-det141_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318634
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 36
+      physical_filter: z_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R11-S00-det036_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318594
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 37
+      physical_filter: z_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R11-S01-det037_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33318642
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 76
+      physical_filter: z_sim_1.4
+    path: CALIB/flat/i/2022-08-06/flat_i-R20-S11-det076_2022-08-06.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+- type: dataset_type
+  name: sky
+  dimensions:
+  - band
+  - instrument
+  - detector
+  - physical_filter
+  storage_class: ExposureF
+  is_calibration: true
+- type: dataset
+  dataset_type: sky
+  run: LSSTCam-imSim/calib/gen2/20231201T000000Z
+  records:
+  - dataset_id:
+    - 33724925
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 48
+      physical_filter: g_sim_1.4
+    path: CALIB/SKY/2023-12-01/g/SKY-2023-12-01-g-R12-S10-det048_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33724964
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 51
+      physical_filter: g_sim_1.4
+    path: CALIB/SKY/2023-12-01/g/SKY-2023-12-01-g-R12-S20-det051_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33724888
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 54
+      physical_filter: g_sim_1.4
+    path: CALIB/SKY/2023-12-01/g/SKY-2023-12-01-g-R13-S00-det054_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33724806
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 26
+      physical_filter: i_sim_1.4
+    path: CALIB/SKY/2023-12-01/i/SKY-2023-12-01-i-R03-S22-det026_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33724736
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 54
+      physical_filter: i_sim_1.4
+    path: CALIB/SKY/2023-12-01/i/SKY-2023-12-01-i-R13-S00-det054_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33724805
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 138
+      physical_filter: i_sim_1.4
+    path: CALIB/SKY/2023-12-01/i/SKY-2023-12-01-i-R32-S10-det138_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33725237
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 54
+      physical_filter: r_sim_1.4
+    path: CALIB/SKY/2023-12-01/r/SKY-2023-12-01-r-R13-S00-det054_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33725153
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 99
+      physical_filter: r_sim_1.4
+    path: CALIB/SKY/2023-12-01/r/SKY-2023-12-01-r-R23-S00-det099_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33725143
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 161
+      physical_filter: r_sim_1.4
+    path: CALIB/SKY/2023-12-01/r/SKY-2023-12-01-r-R34-S22-det161_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33725342
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 13
+      physical_filter: u_sim_1.4
+    path: CALIB/SKY/2023-12-01/u/SKY-2023-12-01-u-R02-S11-det013_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33725356
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 14
+      physical_filter: u_sim_1.4
+    path: CALIB/SKY/2023-12-01/u/SKY-2023-12-01-u-R02-S12-det014_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33725408
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 82
+      physical_filter: u_sim_1.4
+    path: CALIB/SKY/2023-12-01/u/SKY-2023-12-01-u-R21-S01-det082_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33725597
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 55
+      physical_filter: y_sim_1.4
+    path: CALIB/SKY/2023-12-01/y/SKY-2023-12-01-y-R13-S01-det055_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33725497
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 130
+      physical_filter: y_sim_1.4
+    path: CALIB/SKY/2023-12-01/y/SKY-2023-12-01-y-R31-S11-det130_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33725571
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 141
+      physical_filter: y_sim_1.4
+    path: CALIB/SKY/2023-12-01/y/SKY-2023-12-01-y-R32-S20-det141_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33725733
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 36
+      physical_filter: z_sim_1.4
+    path: CALIB/SKY/2023-12-01/z/SKY-2023-12-01-z-R11-S00-det036_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33725790
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 37
+      physical_filter: z_sim_1.4
+    path: CALIB/SKY/2023-12-01/z/SKY-2023-12-01-z-R11-S01-det037_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+  - dataset_id:
+    - 33725804
+    data_id:
+    - instrument: LSSTCam-imSim
+      detector: 76
+      physical_filter: z_sim_1.4
+    path: CALIB/SKY/2023-12-01/z/SKY-2023-12-01-z-R20-S11-det076_2023-12-01.fits
+    formatter: lsst.obs.base.formatters.fitsExposure.FitsExposureFormatter
+- type: associations
+  collection: LSSTCam-imSim/calib
+  collection_type: CALIBRATION
+  validity_ranges:
+  - begin: !butler_time/tai/iso '1994-08-17 00:00:00.000000000'
+    end: !butler_time/tai/iso '2049-05-18 00:00:00.000000000'
+    dataset_ids:
+    - 33317540
+    - 33317392
+    - 33317432
+    - 33317547
+    - 33317420
+    - 33317554
+    - 33317414
+    - 33317468
+    - 33317398
+    - 33317387
+    - 33317544
+    - 33317493
+    - 33317489
+    - 33317415
+    - 33317486
+    - 33317462
+    - 33318779
+    - 33318721
+    - 33318866
+    - 33318869
+    - 33318792
+    - 33318710
+    - 33318768
+    - 33318701
+    - 33318843
+    - 33318862
+    - 33318737
+    - 33318741
+    - 33318734
+    - 33318817
+    - 33318697
+    - 33318772
+    - 33318298
+    - 33318312
+    - 33317707
+    - 33318634
+    - 33318594
+    - 33317851
+    - 33317757
+    - 33317878
+    - 33317628
+    - 33318007
+    - 33318495
+    - 33318642
+    - 33318198
+    - 33318124
+    - 33318379
+    - 33317576
+    - 33318479
+    - 33318062
+    - 33725342
+    - 33725356
+    - 33724806
+    - 33725733
+    - 33725790
+    - 33724925
+    - 33724964
+    - 33724888
+    - 33724736
+    - 33725237
+    - 33725597
+    - 33725804
+    - 33725408
+    - 33725153
+    - 33725497
+    - 33724805
+    - 33725571
+    - 33725143
+- type: associations
+  collection: LSSTCam-imSim/refcats
+  collection_type: TAGGED
+  dataset_ids:
+  - 3653903
+  - 3654186

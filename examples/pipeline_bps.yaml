@@ -1,0 +1,42 @@
+pipelineYaml: "$OBS_LSST_DIR/pipelines/imsim/DRP.yaml#singleFrame,multiVisit"
+templateDataId: "{tract}_{patch}_{band}_{visit}_{exposure}_{detector}"
+project: DC2
+campaign: testing
+submitPath: ${PWD}/submit/{outCollection}
+computeSite: ncsapool
+requestMemory: 2048
+requestCpus: 1
+
+payload:
+  runInit: true
+  payloadName: ci_imsim-rerun
+  butlerConfig: ${PWD}/DATA
+  inCollection: LSSTCam-imSim/defaults
+  output: LSSTCam-imSim/runs/ci_imsim
+  outCollection: "{output}/{timestamp}"
+  dataQuery: instrument = 'LSSTCam-imSim' and tract = 0 and patch = 24 and skymap='discrete/ci_imsim/4k'
+
+pipetask:
+  pipetaskInit:
+    runQuantumCommand: "${CTRL_MPEXEC_DIR}/bin/pipetask run -b {butlerConfig} -i {inCollection} --output {output} --output-run {outCollection} --init-only --register-dataset-types --qgraph {qgraphFile} --clobber-partial-outputs --no-versions"
+  deblend:
+    requestMemory: 8192
+  forcedPhotCcd:
+    requestMemory: 4096
+  forcedPhotCoadd: 
+    requestMemory: 4096
+  forcedPhotDiffim: 
+    requestMemory: 4096
+  imageDifference: 
+    requestMemory: 4096
+  makeWarp:
+    requestMemory: 4096
+  measure:
+    requestMemory: 4096
+  writeObjectTable:
+    requestMemory: 4096
+
+wmsServiceClass: lsst.ctrl.bps.wms.htcondor.htcondor_service.HTCondorService
+clusterAlgorithm: lsst.ctrl.bps.quantum_clustering_funcs.single_quantum_clustering
+createQuantumGraph: '${CTRL_MPEXEC_DIR}/bin/pipetask qgraph -d "{dataQuery}" -b {butlerConfig} -i {inCollection} -p {pipelineYaml} -q {qgraphFile} --qgraph-dot {qgraphFile}.dot'
+runQuantumCommand: "${CTRL_MPEXEC_DIR}/bin/pipetask --long-log run -b {butlerConfig} -i {inCollection} --output {output} --output-run {outCollection} --extend-run --skip-init-writes --qgraph {qgraphFile} --clobber-partial-outputs --no-versions"
