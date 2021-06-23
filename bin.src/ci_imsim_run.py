@@ -29,7 +29,7 @@ class ImsimWriteCuratedCalibrations(WriteCuratedCalibrations):
     instrumentName = INSTRUMENT_NAME
 
 
-ciRunner.register("skymap", 3)(RegisterSkyMap)
+ciRunner.register("skymap", index_command := index_command + 1)(RegisterSkyMap)
 
 
 @ciRunner.register("skymap_small", index_command := index_command + 1)
