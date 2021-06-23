@@ -97,7 +97,7 @@ class QgraphCommand(BaseCommand):
             "--config", f"deblend:multibandDeblend.processSingles={self.arguments.process_singles}",
         )
         pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
-        subprocess.run(pipetask)
+        subprocess.run(pipetask, check=True)
 
 
 @ciRunner.register("process", index_command := index_command + 1)
@@ -114,7 +114,7 @@ class ProcessingCommand(BaseCommand):
             "--qgraph", os.path.join(self.runner.RunDir, QGRAPH_FILE),
         )
         pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
-        subprocess.run(pipetask)
+        subprocess.run(pipetask, check=True)
 
 
 ciRunner.register("test", index_command := index_command + 1)(TestRunner)
