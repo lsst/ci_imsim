@@ -13,6 +13,9 @@ QGRAPH_FILE = "DRP.qgraph"
 INPUTCOL = f"{INSTRUMENT_NAME}/defaults"
 COLLECTION = f"{INSTRUMENT_NAME}/runs/ci_imsim"
 
+QGRAPH_FARO_FILE = "faro.qgraph"
+COLLECTION_FARO = f"{INSTRUMENT_NAME}/runs/ci_imsim/faro"
+
 index_command = 0
 
 ciRunner = CommandRunner(os.environ["CI_IMSIM_DIR"])
@@ -113,6 +116,40 @@ class ProcessingCommand(BaseCommand):
             "--register-dataset-types",
             "--skip-existing",
             "--qgraph", os.path.join(self.runner.RunDir, QGRAPH_FILE),
+        )
+        pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
+        subprocess.run(pipetask, check=True)
+
+
+@ciRunner.register("qgraph_faro", index_command := index_command + 1)
+class QgraphFaroCommand(BaseCommand):
+    def run(self, currentState: BuildState):
+        args = (
+            "qgraph",
+            "-d", "skymap='discrete/ci_imsim/4k' AND tract=0 AND patch=24",
+            "-b", self.runner.RunDir,
+            "--input", COLLECTION,
+            "--output", COLLECTION_FARO,
+            "-p", os.path.join(os.environ["FARO_DIR"], "pipelines", "metrics_pipeline.yaml"),
+            "--skip-existing",
+            "--save-qgraph", os.path.join(self.runner.RunDir, QGRAPH_FARO_FILE),
+        )
+        pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
+        subprocess.run(pipetask, check=True)
+
+
+@ciRunner.register("process_faro", index_command := index_command + 1)
+class ProcessingFaroCommand(BaseCommand):
+    def run(self, currentState: BuildState):
+        args = (
+            "run",
+            "-j", str(self.arguments.num_cores),
+            "-b", self.runner.RunDir,
+            "--input", COLLECTION,
+            "--output", COLLECTION_FARO,
+            "--register-dataset-types",
+            "--skip-existing",
+            "--qgraph", os.path.join(self.runner.RunDir, QGRAPH_FARO_FILE),
         )
         pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
         subprocess.run(pipetask, check=True)
