@@ -87,6 +87,7 @@ class QgraphCommand(BaseCommand):
 
     def run(self, currentState: BuildState):
         args = (
+            "--long-log",
             "qgraph",
             "-d", "skymap='discrete/ci_imsim/4k' AND tract=0 AND patch=24",
             "-b", self.runner.RunDir,
@@ -108,6 +109,7 @@ class QgraphCommand(BaseCommand):
 class ProcessingCommand(BaseCommand):
     def run(self, currentState: BuildState):
         args = (
+            "--long-log",
             "run",
             "-j", str(self.arguments.num_cores),
             "-b", self.runner.RunDir,
@@ -125,6 +127,7 @@ class ProcessingCommand(BaseCommand):
 class QgraphFaroCommand(BaseCommand):
     def run(self, currentState: BuildState):
         args = (
+            "--long-log",
             "qgraph",
             "-d", "skymap='discrete/ci_imsim/4k' AND tract=0 AND patch=24",
             "-b", self.runner.RunDir,
@@ -142,6 +145,7 @@ class QgraphFaroCommand(BaseCommand):
 class ProcessingFaroCommand(BaseCommand):
     def run(self, currentState: BuildState):
         args = (
+            "--long-log",
             "run",
             "-j", str(self.arguments.num_cores),
             "-b", self.runner.RunDir,
