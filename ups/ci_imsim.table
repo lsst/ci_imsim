@@ -16,6 +16,7 @@ setupRequired(meas_modelfit)
 setupRequired(obs_lsst)
 setupRequired(pipe_base)
 setupRequired(pipe_tasks)
+setupRequired(sdm_schemas)
 setupRequired(testdata_ci_imsim)
 setupRequired(utils)
 
