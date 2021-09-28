@@ -47,6 +47,7 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
                            for column in sdmSchema[0]['columns']}
 
         df = self.butler.get(dataset, dataId)
+        df.reset_index(inplace=True)
         outputColumnNames = set(df.columns.to_list())
         self.assertEqual(outputColumnNames, set(expectedColumns.keys()))
 
