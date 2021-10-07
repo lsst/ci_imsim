@@ -41,9 +41,3 @@ An example batch submission script for the ``ctrl_bps`` is provided in
 ``examples``. To use it, run ``bin/ci_imsim_run.py import_external``
 to set up the repo without running the pipeline, then run
 ``bps submit examples/pipelines_bps.yaml``.
-
-MacOS Build Failures
-====================
-
-MacOS eups builds (through Jenkins or otherwise) often fail; see 
-`DM-30721 <https://jira.lsstcorp.org/browse/DM-30721>`_.
