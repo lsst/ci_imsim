@@ -72,6 +72,26 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
         dataId = {"instrument": "LSSTCam-imSim", "detector": 100, "visit": 5884, "band": "y"}
         self._validateSchema("sourceTable_visit", dataId, "source")
 
+    def testForcedSourceSchemaMatch(self):
+        """Check forcedSourceTable_tract"""
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        self._validateSchema("forcedSourceTable_tract", dataId, "forcedSource")
+
+    def testDiaObjectSchemaMatch(self):
+        """Check diaObjectTable_tract"""
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        self._validateSchema("diaObjectTable_tract", dataId, "diaObject")
+
+    def testDiaSourceSchemaMatch(self):
+        """Check one diaSourceTable_tract"""
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        self._validateSchema("diaSourceTable_tract", dataId, "diaSource")
+
+    def testForcedSourceeOnDiaObjectSchemaMatch(self):
+        """Check forcedSourceOnDiaObjectTable_tract"""
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        self._validateSchema("forcedSourceOnDiaObjectTable_tract", dataId, "forcedSourceOnDiaObject")
+
 
 if __name__ == "__main__":
     lsst.utils.tests.init()
