@@ -35,7 +35,7 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
     def setUp(self):
         self.butler = Butler(os.path.join(getPackageDir("ci_imsim"), "DATA"),
                              writeable=False, collections=["LSSTCam-imSim/runs/ci_imsim"])
-        schemaFile = os.path.join(getPackageDir("sdm_schemas"), 'yml', 'dp02_dc2.yaml')
+        schemaFile = os.path.join(getPackageDir("sdm_schemas"), 'yml', 'imsim.yaml')
         with open(schemaFile, "r") as f:
             self.schema = yaml.safe_load(f)['tables']
 
