@@ -35,7 +35,7 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
     def setUp(self):
         self.butler = Butler(os.path.join(getPackageDir("ci_imsim"), "DATA"),
                              writeable=False, collections=["LSSTCam-imSim/runs/ci_imsim"])
-        schemaFile = os.path.join(getPackageDir("sdm_schemas"), 'yml', 'dp02_dc2.yaml')
+        schemaFile = os.path.join(getPackageDir("sdm_schemas"), 'yml', 'imsim.yaml')
         with open(schemaFile, "r") as f:
             self.schema = yaml.safe_load(f)['tables']
 
@@ -71,6 +71,26 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
         """Check one sourceTable_visit"""
         dataId = {"instrument": "LSSTCam-imSim", "detector": 100, "visit": 5884, "band": "y"}
         self._validateSchema("sourceTable_visit", dataId, "source")
+
+    def testForcedSourceSchemaMatch(self):
+        """Check forcedSourceTable_tract"""
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        self._validateSchema("forcedSourceTable_tract", dataId, "forcedSource")
+
+    def testDiaObjectSchemaMatch(self):
+        """Check diaObjectTable_tract"""
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        self._validateSchema("diaObjectTable_tract", dataId, "diaObject")
+
+    def testDiaSourceSchemaMatch(self):
+        """Check one diaSourceTable_tract"""
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        self._validateSchema("diaSourceTable_tract", dataId, "diaSource")
+
+    def testForcedSourceeOnDiaObjectSchemaMatch(self):
+        """Check forcedSourceOnDiaObjectTable_tract"""
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        self._validateSchema("forcedSourceOnDiaObjectTable_tract", dataId, "forcedSourceOnDiaObject")
 
 
 if __name__ == "__main__":
