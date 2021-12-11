@@ -55,6 +55,7 @@ data:
   - LSSTCam-imSim/calib
   - skymaps
   - LSSTCam-imSim/refcats
+  - LSSTCam-imSim/truth_summary
 - type: dataset_type
   name: bias
   dimensions:
