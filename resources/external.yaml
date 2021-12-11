@@ -36,6 +36,12 @@ data:
   timespan_end: null
 - type: collection
   collection_type: RUN
+  name: LSSTCam-imSim/truth_summary
+  host: null
+  timespan_begin: null
+  timespan_end: null
+- type: collection
+  collection_type: RUN
   name: skymaps
   host: null
   timespan_begin: null
@@ -712,3 +718,23 @@ data:
   dataset_ids:
   - 3653903
   - 3654186
+- type: dataset_type
+  name: truth_summary
+  dimensions:
+  - skymap
+  - tract
+  storage_class: DataFrame
+  is_calibration: false
+- type: dataset
+  dataset_type: truth_summary
+  run: LSSTCam-imSim/truth_summary
+  records:
+  - dataset_id:
+    - !uuid 'c2d3d2c3-f894-4cb2-abfb-8e80d24a172d'
+    data_id:
+    - skymap: discrete/ci_imsim/4k
+      # tract 0 in the discrete skymap lines up almost exactly with 3828
+      # (small differences shouldn't matter)
+      tract: 0
+    path: truth_summary/3828/truth_summary_3828_DC2_2_2i_truth_summary.parq
+    formatter: lsst.daf.butler.formatters.parquet.ParquetFormatter
