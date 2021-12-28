@@ -90,7 +90,7 @@ class QgraphCommand(BaseCommand):
             "-b", self.runner.RunDir,
             "--input", INPUTCOL,
             "--output", COLLECTION,
-            "-p", "$OBS_LSST_DIR/pipelines/imsim/DRP.yaml",
+            "-p", "$DRP_PIPE_DIR/pipelines/LSSTCam-imSim/DRP-ci_imsim.yaml",
             "--skip-existing",
             "--save-qgraph", os.path.join(self.runner.RunDir, QGRAPH_FILE),
             "--config", f"deblend:multibandDeblend.useCiLimits={self.arguments.limit_deblend}",
