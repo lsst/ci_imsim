@@ -96,7 +96,6 @@ class QgraphCommand(BaseCommand):
             "--config", f"deblend:multibandDeblend.useCiLimits={self.arguments.limit_deblend}",
             "--config", f"calibrate:deblend.useCiLimits={self.arguments.limit_deblend}",
             "--config", f"deblend:multibandDeblend.processSingles={self.arguments.process_singles}",
-            "--config", "imageDifference:requiredTemplateFraction=0.2",
         )
         pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
         subprocess.run(pipetask, check=True)
