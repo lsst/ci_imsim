@@ -30,7 +30,7 @@ External Resources
 ==================
 
 The provided ``resources/external.yaml`` can be re-generated using e.g.
-``bin.src/ci_imsim_export_external_data.py /repo/dc2 test.yaml
+``python bin.src/ci_imsim_export_external_data.py /repo/dc2 test.yaml
 "2.2i/defaults/ci_imsim"``. Some of the generated paths may need to be
 modified to match their paths in ``testdata_ci_imsim``.
 
