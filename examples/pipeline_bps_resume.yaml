@@ -1,4 +1,4 @@
-pipelineYaml: "$OBS_LSST_DIR/pipelines/imsim/DRP.yaml#singleFrame,multiVisit"
+pipelineYaml: "$DRP_PIPE_DIR/pipelines/LSSTCam-imSim/DRP-ci_imsim.yaml#singleFrame,multiVisit"
 templateDataId: "{tract}_{patch}_{band}_{visit}_{exposure}_{detector}"
 project: DC2
 campaign: testing
@@ -23,11 +23,11 @@ pipetask:
     requestMemory: 8192
   forcedPhotCcd:
     requestMemory: 4096
-  forcedPhotCoadd: 
+  forcedPhotCoadd:
     requestMemory: 4096
-  forcedPhotDiffim: 
+  forcedPhotDiffim:
     requestMemory: 4096
-  imageDifference: 
+  imageDifference:
     requestMemory: 4096
   makeWarp:
     requestMemory: 4096
