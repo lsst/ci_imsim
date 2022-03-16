@@ -44,6 +44,7 @@ if __name__ == "__main__":
             "LSSTCam-imSim/calib/gen2/2022-01-01",
             "LSSTCam-imSim/calib/gen2/2022-08-06",
             "truth_summary",
+            "red_galaxies_cosmodc2",
         ],
     )
 
@@ -58,7 +59,16 @@ if __name__ == "__main__":
         return dataset
 
     with butler.export(filename=args.filename) as export:
-        for datasetTypeName in ("bias", "dark", "flat", "sky", "SKY", "cal_ref_cat_2_2", "truth_summary"):
+        for datasetTypeName in (
+                "bias",
+                "dark",
+                "flat",
+                "sky",
+                "SKY",
+                "cal_ref_cat_2_2",
+                "truth_summary",
+                "cosmodc2_1_1_4_redmapper_v0_8_1_redgals"
+        ):
             export.saveDatasets(butler.registry.queryDatasets(datasetTypeName, collections=collections),
                                 elements=(), rewrite=rewrite)
         for flattenChains in (True, False):
