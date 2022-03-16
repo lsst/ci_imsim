@@ -42,6 +42,12 @@ data:
   timespan_end: null
 - type: collection
   collection_type: RUN
+  name: LSSTCam-imSim/red_galaxies_cosmodc2
+  host: null
+  timespan_begin: null
+  timespan_end: null
+- type: collection
+  collection_type: RUN
   name: skymaps
   host: null
   timespan_begin: null
@@ -56,6 +62,7 @@ data:
   - skymaps
   - LSSTCam-imSim/refcats
   - LSSTCam-imSim/truth_summary
+  - LSSTCam-imSim/red_galaxies_cosmodc2
 - type: dataset_type
   name: bias
   dimensions:
@@ -738,4 +745,19 @@ data:
       # (small differences shouldn't matter)
       tract: 0
     path: truth_summary/3828/truth_summary_3828_DC2_2_2i_truth_summary.parq
+    formatter: lsst.daf.butler.formatters.parquet.ParquetFormatter
+- type: dataset_type
+  name: cosmodc2_1_1_4_redmapper_v0_8_1_redgals
+  dimensions: []
+  storage_class: DataFrame
+  is_calibration: false
+- type: dataset
+  dataset_type: cosmodc2_1_1_4_redmapper_v0_8_1_redgals
+  run: LSSTCam-imSim/red_galaxies_cosmodc2
+  records:
+  - dataset_id:
+    - !uuid '712f4fa8-ee1c-4910-b187-bf3171f8b199'
+    data_id:
+    - {}
+    path: red_galaxies_cosmodc2/cosmodc2_1_1_4_redmapper_v0_8_1_redgals/cosmodc2_1_1_4_redmapper_v0_8_1_redgals_2_2i_red_galaxies_cosmodc2.parq
     formatter: lsst.daf.butler.formatters.parquet.ParquetFormatter
