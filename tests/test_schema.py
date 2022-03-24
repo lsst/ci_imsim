@@ -95,6 +95,16 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
         dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
         self._validateSchema("forcedSourceOnDiaObjectTable_tract", dataId, "forcedSourceOnDiaObject")
 
+    def testMatchRefSchemaMatch(self):
+        """Check match_ref_truth_summary_objectTable_tract"""
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        self._validateSchema("match_ref_truth_summary_objectTable_tract", dataId, "matchesTruth")
+
+    def testMatchObjectSchemaMatch(self):
+        """Check match_target_truth_summary_objectTable_tract"""
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        self._validateSchema("match_target_truth_summary_objectTable_tract", dataId, "matchesObject")
+
 
 if __name__ == "__main__":
     lsst.utils.tests.init()
