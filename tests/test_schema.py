@@ -41,6 +41,8 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
 
     def _validateSchema(self, dataset, dataId, tableName):
         """Check column name and data type match between dataset and DDL"""
+        info = f"dataset={dataset} tableName={tableName} dataId={dataId}"
+
         sdmSchema = [table for table in self.schema if table['name'] == tableName]
         self.assertEqual(len(sdmSchema), 1)
         expectedColumns = {column['name']: column['datatype']
@@ -49,7 +51,7 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
         df = self.butler.get(dataset, dataId)
         df.reset_index(inplace=True)
         outputColumnNames = set(df.columns.to_list())
-        self.assertEqual(outputColumnNames, set(expectedColumns.keys()))
+        self.assertEqual(outputColumnNames, set(expectedColumns.keys()), f"{info} failed")
 
         # the data type mapping from felis datatype to pandas
         typeMapping = {"boolean": "bool",
@@ -60,7 +62,8 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
                        "char": "object"}
         for column in outputColumnNames:
             self.assertEqual(df.dtypes.get(column).name,
-                             typeMapping[expectedColumns[column]])
+                             typeMapping[expectedColumns[column]],
+                             f"{info} column={column} failed")
 
     def testObjectSchemaMatch(self):
         """Check objectTable_tract"""
