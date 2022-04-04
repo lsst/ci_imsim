@@ -92,6 +92,7 @@ class QgraphCommand(BaseCommand):
             "--output", COLLECTION,
             "-p", "$DRP_PIPE_DIR/pipelines/LSSTCam-imSim/DRP-ci_imsim.yaml",
             "--skip-existing",
+            "--dataset-query-constraint", "raw",  # workaround pending DM-34247
             "--save-qgraph", os.path.join(self.runner.RunDir, QGRAPH_FILE),
             "--config", f"deblend:multibandDeblend.useCiLimits={self.arguments.limit_deblend}",
             "--config", f"calibrate:deblend.useCiLimits={self.arguments.limit_deblend}",
