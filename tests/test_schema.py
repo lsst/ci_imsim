@@ -70,7 +70,7 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
     def testSourceSchemaMatch(self):
         """Check one sourceTable_visit"""
         dataId = {"instrument": "LSSTCam-imSim", "detector": 100, "visit": 5884, "band": "y"}
-        self._validateSchema("sourceTable_visit", dataId, "source")
+        self._validateSchema("calibratedSourceTable_visit", dataId, "source")
 
     def testForcedSourceSchemaMatch(self):
         """Check forcedSourceTable_tract"""
