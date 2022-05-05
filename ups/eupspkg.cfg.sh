@@ -10,3 +10,8 @@ config(){
 build(){
     $CI_BUILDER_DIR/bin/sip_safe_python.sh bin/ci_imsim_run.py --config-limit-deblend -j $NJOBS
 }
+
+install() {
+    clean_old_install
+    install_ups
+}
