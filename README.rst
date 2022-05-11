@@ -26,6 +26,8 @@ To run this package locally:
    rewrite python shebang lines
 5) run ``bin/ci_imsim_run.py`` (see available options with ``--help``)
 
+To cleanup after a run, use either ``bin/ci_imsim_run.py --clean`` or ``rm -rf DATA/``.
+
 External Resources
 ==================
 
