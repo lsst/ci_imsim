@@ -12,6 +12,8 @@ INSTRUMENT_NAME = "LSSTCam-imSim"
 QGRAPH_FILE = "DRP.qgraph"
 INPUTCOL = f"{INSTRUMENT_NAME}/defaults"
 COLLECTION = f"{INSTRUMENT_NAME}/runs/ci_imsim"
+HIPS_QGRAPH_FILE = "hips.qgraph"
+HIPS_COLLECTION = f"{INSTRUMENT_NAME}/runs/ci_imsim_hips"
 
 index_command = 0
 
@@ -114,6 +116,37 @@ class ProcessingCommand(BaseCommand):
             "--register-dataset-types",
             "--skip-existing",
             "--qgraph", os.path.join(self.runner.RunDir, QGRAPH_FILE),
+        )
+        pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
+        subprocess.run(pipetask, check=True)
+
+
+@ciRunner.register("hips_qgraph", index_command := index_command + 1)
+class HipsQgraphCommand(BaseCommand):
+    def run(self, currentState: BuildState):
+        args = (
+            "build",
+            "-b", self.runner.RunDir,
+            "-p", "$CI_IMSIM_DIR/resources/highres_hips.yaml",
+            "-i", COLLECTION,
+            "--pixels", str(33),
+            "-q", os.path.join(self.runner.RunDir, HIPS_QGRAPH_FILE)
+        )
+        builder = self.runner.getExecutableCmd("PIPE_TASKS_DIR", "build-high-resolution-hips-qg", args)
+        subprocess.run(builder, check=True)
+
+
+@ciRunner.register("hips_process", index_command := index_command + 1)
+class HipsProcessCommand(BaseCommand):
+    def run(self, currentState: BuildState):
+        args = (
+            "--long-log",
+            "run",
+            "-j", str(self.arguments.num_cores),
+            "-b", self.runner.RunDir,
+            "--output", HIPS_COLLECTION,
+            "--register-dataset-types",
+            "-g", HIPS_QGRAPH_FILE
         )
         pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
         subprocess.run(pipetask, check=True)

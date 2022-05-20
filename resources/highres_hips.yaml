@@ -1,0 +1,5 @@
+description: Run HighResolutionHipsTask
+instrument: lsst.obs.lsst.LsstCamImSim
+tasks:
+  highResolutionHips9:
+    class: lsst.pipe.tasks.hips.HighResolutionHipsTask
