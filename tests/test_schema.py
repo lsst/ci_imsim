@@ -68,42 +68,42 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
     def testObjectSchemaMatch(self):
         """Check objectTable_tract"""
         dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
-        self._validateSchema("objectTable_tract", dataId, "object")
+        self._validateSchema("objectTable_tract", dataId, "Object")
 
     def testSourceSchemaMatch(self):
         """Check one sourceTable_visit"""
         dataId = {"instrument": "LSSTCam-imSim", "detector": 100, "visit": 5884, "band": "y"}
-        self._validateSchema("sourceTable_visit", dataId, "source")
+        self._validateSchema("sourceTable_visit", dataId, "Source")
 
     def testForcedSourceSchemaMatch(self):
         """Check forcedSourceTable_tract"""
         dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
-        self._validateSchema("forcedSourceTable_tract", dataId, "forcedSource")
+        self._validateSchema("forcedSourceTable_tract", dataId, "ForcedSource")
 
     def testDiaObjectSchemaMatch(self):
         """Check diaObjectTable_tract"""
         dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
-        self._validateSchema("diaObjectTable_tract", dataId, "diaObject")
+        self._validateSchema("diaObjectTable_tract", dataId, "DiaObject")
 
     def testDiaSourceSchemaMatch(self):
         """Check one diaSourceTable_tract"""
         dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
-        self._validateSchema("diaSourceTable_tract", dataId, "diaSource")
+        self._validateSchema("diaSourceTable_tract", dataId, "DiaSource")
 
     def testForcedSourceeOnDiaObjectSchemaMatch(self):
         """Check forcedSourceOnDiaObjectTable_tract"""
         dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
-        self._validateSchema("forcedSourceOnDiaObjectTable_tract", dataId, "forcedSourceOnDiaObject")
+        self._validateSchema("forcedSourceOnDiaObjectTable_tract", dataId, "ForcedSourceOnDiaObject")
 
     def testMatchRefSchemaMatch(self):
         """Check match_ref_truth_summary_objectTable_tract"""
         dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
-        self._validateSchema("match_ref_truth_summary_objectTable_tract", dataId, "matchesTruth")
+        self._validateSchema("match_ref_truth_summary_objectTable_tract", dataId, "MatchesTruth")
 
     def testMatchObjectSchemaMatch(self):
         """Check match_target_truth_summary_objectTable_tract"""
         dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
-        self._validateSchema("match_target_truth_summary_objectTable_tract", dataId, "matchesObject")
+        self._validateSchema("match_target_truth_summary_objectTable_tract", dataId, "MatchesObject")
 
 
 if __name__ == "__main__":
