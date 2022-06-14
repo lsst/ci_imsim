@@ -165,6 +165,7 @@ class HipsGenerateCommand(BaseCommand):
             "--output", HIPS_COLLECTION,
             "-p", "$CI_IMSIM_DIR/resources/gen_hips.yaml",
             "-c", "generateHips:hips_base_uri="+hipsDir,
+            "-c", "generateColorHips:hips_base_uri="+hipsDir,
             "--register-dataset-types"
         )
         pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)

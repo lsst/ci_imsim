@@ -10,3 +10,12 @@ tasks:
         config.properties.obs_title_base = "CI imSim"
         config.properties.obs_description = "ci_imsim test dataset"
         config.properties.prov_progenitor = "Rubin Science Pipelines"
+  generateColorHips:
+    class: lsst.pipe.tasks.hips.GenerateColorHipsTask
+    config:
+      python: |
+        config.properties.creator_did_base = "ivo://lsst/ci_imsim"
+        config.properties.obs_collection = "ci_imsim"
+        config.properties.obs_title_base = "CI imSim"
+        config.properties.obs_description = "ci_imsim test dataset"
+        config.properties.prov_progenitor = "Rubin Science Pipelines"
