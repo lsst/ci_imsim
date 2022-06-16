@@ -5,17 +5,25 @@ tasks:
     class: lsst.pipe.tasks.hips.GenerateHipsTask
     config:
       python: |
-        config.properties.creator_did_base = "ivo://lsst/ci_imsim"
-        config.properties.obs_collection = "ci_imsim"
-        config.properties.obs_title_base = "CI imSim"
+        config.properties.creator_did_template = "temp://lsst/ci_imsim/hips/images/band_{band}"
+        config.properties.obs_title_template = "CI imSim for band {band}"
         config.properties.obs_description = "ci_imsim test dataset"
-        config.properties.prov_progenitor = "Rubin Science Pipelines"
+        config.properties.prov_progenitor = ["Coadded data from the ci_imsim test dataset.",
+                                             "HiPS generation: internal pre-release code (https://pipelines.lsst.io/v/w_2022_22/index.html"]
+        config.properties.t_min = 59582.04
+        config.properties.t_max = 61406.04
+        config.properties.obs_ack = "We gratefully acknowledge permission to use the DC2 simulated dataset from the LSST Dark Energy Science Collaboration and thank the collaboration for all the work and insight it represents."
   generateColorHips:
     class: lsst.pipe.tasks.hips.GenerateColorHipsTask
     config:
       python: |
-        config.properties.creator_did_base = "ivo://lsst/ci_imsim"
-        config.properties.obs_collection = "ci_imsim"
-        config.properties.obs_title_base = "CI imSim"
+        config.properties.creator_did_template = "temp://lsst/ci_imsim/hips/images/color_gri"
+        config.properties.obs_title_template = "CI imSim: gri color visualization"
         config.properties.obs_description = "ci_imsim test dataset"
-        config.properties.prov_progenitor = "Rubin Science Pipelines"
+        config.properties.prov_progenitor = ["Coadded data from the ci_imsim test dataset.",
+                                             "HiPS generation: internal pre-release code (https://pipelines.lsst.io/v/w_2022_22/index.html"]
+        config.properties.t_min = 59582.04
+        config.properties.t_max = 61406.04
+        config.properties.obs_ack = "We gratefully acknowledge permission to use the DC2 simulated dataset from the LSST Dark Energy Science Collaboration and thank the collaboration for all the work and insight it represents."
+
+
