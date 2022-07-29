@@ -152,6 +152,26 @@ class HipsProcessCommand(BaseCommand):
         subprocess.run(pipetask, check=True)
 
 
+@ciRunner.register("hips_generate", index_command := index_command + 1)
+class HipsGenerateCommand(BaseCommand):
+    def run(self, currentState: BuildState):
+        hipsDir = os.path.join(self.runner.RunDir, "hips")
+        args = (
+            "--long-log",
+            "run",
+            "-j", str(self.arguments.num_cores),
+            "-b", self.runner.RunDir,
+            "-i", HIPS_COLLECTION,
+            "--output", HIPS_COLLECTION,
+            "-p", "$CI_IMSIM_DIR/resources/gen_hips.yaml",
+            "-c", "generateHips:hips_base_uri="+hipsDir,
+            "-c", "generateColorHips:hips_base_uri="+hipsDir,
+            "--register-dataset-types"
+        )
+        pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
+        subprocess.run(pipetask, check=True)
+
+
 ciRunner.register("test", index_command := index_command + 1)(TestRunner)
 
 ciRunner.run()
