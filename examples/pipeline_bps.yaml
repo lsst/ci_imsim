@@ -27,7 +27,7 @@ pipetask:
     requestMemory: 4096
   forcedPhotDiffim:
     requestMemory: 4096
-  imageDifference:
+  subtractImages:
     requestMemory: 4096
   makeWarp:
     requestMemory: 4096
