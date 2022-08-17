@@ -21,9 +21,11 @@
 
 import unittest
 import os
+import re
 
 from lsst.daf.butler import Butler
 from lsst.utils import getPackageDir
+from lsst.resources import ResourcePath
 
 
 class TestHipsOutputs(unittest.TestCase):
@@ -33,6 +35,7 @@ class TestHipsOutputs(unittest.TestCase):
                              instrument="LSSTCam-imSim", skymap="discrete/ci_imsim/4k",
                              writeable=False, collections=["LSSTCam-imSim/runs/ci_imsim_hips"])
         self._bands = ['u', 'g', 'r', 'i', 'z', 'y']
+        self.hips_uri_base = ResourcePath(os.path.join(getPackageDir("ci_imsim"), "DATA", "hips"))
 
     def test_hips_exist(self):
         """Test that the HIPS images exist and are readable."""
@@ -49,6 +52,46 @@ class TestHipsOutputs(unittest.TestCase):
 
             self.assertEqual(exp.wcs.getFitsMetadata()["CTYPE1"], "RA---HPX")
             self.assertEqual(exp.wcs.getFitsMetadata()["CTYPE2"], "DEC--HPX")
+
+    def test_hips_trees_exist(self):
+        """Test that the HiPS tree exists and has correct files."""
+        for band in self._bands:
+            self._check_hips_tree(self.hips_uri_base.join(f"band_{band}", forceDirectory=True))
+        self._check_hips_tree(self.hips_uri_base.join("color_gri", forceDirectory=True), check_fits=False)
+
+    def _check_hips_tree(self, hips_uri, check_fits=True):
+        """Check a HiPS tree for files.
+
+        Parameters
+        ----------
+        hips_uri : `lsst.resources.ResourcePath`
+            URI of base of HiPS tree.
+        check_fits : `bool`, optional
+            Check if FITS images exist.
+        """
+        self.assertTrue(hips_uri.join("properties").exists(), msg="properties file not found.")
+        self.assertTrue(hips_uri.join("Moc.fits").exists(), msg="Moc.fits file not found.")
+        allsky = hips_uri.join("Norder3", forceDirectory=True).join("Allsky.png")
+        self.assertTrue(allsky.exists(), msg="Allsky.png file not found.")
+
+        for order in range(3, 12):
+            order_uri = hips_uri.join(f"Norder{order}", forceDirectory=True)
+            png_uris = list(
+                ResourcePath.findFileResources(
+                    candidates=[order_uri],
+                    file_filter=re.compile(r'Npix.*\.png'),
+                )
+            )
+            self.assertGreater(len(png_uris), 0, msg="No PNGs found.")
+
+            if check_fits:
+                fits_uris = list(
+                    ResourcePath.findFileResources(
+                        candidates=[order_uri],
+                        file_filter=re.compile(r'Npix.*\.fits'),
+                    )
+                )
+                self.assertEqual(len(fits_uris), len(png_uris), msg="Number of FITS != number of PNGs.")
 
 
 if __name__ == "__main__":
