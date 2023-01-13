@@ -27,12 +27,15 @@ from lsst.daf.butler import Butler
 from lsst.utils import getPackageDir
 from lsst.resources import ResourcePath
 
+butler = Butler(f'{os.environ["CI_IMSIM_DIR"]}/DATA', collections=['LSSTCam-imSim/runs/ci_imsim'])
+skymap = list(butler.registry.queryDatasets(datasetType='objectTable_tract'))[0].dataId['skymap']
+
 
 class TestHipsOutputs(unittest.TestCase):
     """Check that HIPS outputs are as expected."""
     def setUp(self):
         self.butler = Butler(os.path.join(getPackageDir("ci_imsim"), "DATA"),
-                             instrument="LSSTCam-imSim", skymap="discrete/ci_imsim/4k",
+                             instrument="LSSTCam-imSim", skymap=skymap,
                              writeable=False, collections=["LSSTCam-imSim/runs/ci_imsim_hips"])
         self._bands = ['u', 'g', 'r', 'i', 'z', 'y']
         self.hips_uri_base = ResourcePath(os.path.join(getPackageDir("ci_imsim"), "DATA", "hips"))

@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 import os
 import subprocess
+import sys
 
 from lsst.ci.builder import CommandRunner, BuildState, BaseCommand
 from lsst.ci.builder.commands import (CreateButler, RegisterInstrument, WriteCuratedCalibrations,
@@ -14,6 +15,23 @@ INPUTCOL = f"{INSTRUMENT_NAME}/defaults"
 COLLECTION = f"{INSTRUMENT_NAME}/runs/ci_imsim"
 HIPS_QGRAPH_FILE = "hips.qgraph"
 HIPS_COLLECTION = f"{INSTRUMENT_NAME}/runs/ci_imsim_hips"
+SKYMAP_PREFIX = 'discrete/ci_imsim/'
+
+parser = ArgumentParser(
+    prog='ci_imsim',
+    description='Run ci_imsim on testdata_ci_imsim data',
+)
+parser.add_argument(
+    '--use_skymap_small',
+    action='store_true',
+    help='Use a smaller 2k x 2k pixel patch skymap instead of 4k^2 default'
+)
+args, args_left = parser.parse_known_args()
+sys.argv = sys.argv[:1] + args_left
+
+skymap_suffix = '2k' if args.use_skymap_small else '4k'
+# center patch: 7x7=49, (49-1)/2 = 24; 13x13 = 169, (169-1)/2 = 84
+patch = 84 if args.use_skymap_small else 24
 
 index_command = 0
 
@@ -49,9 +67,9 @@ class ImsimIngestRaws(IngestRaws):
 
     # TODO: Remove when DM-30607 is fixed (needed for MacOS only)
     def run(self, currentState: BuildState):
-        self.arguments.num_cores, saveCores = '1', self.arguments.num_cores
-        super().run(currentState)
-        self.arguments.num_cores = saveCores
+       self.arguments.num_cores, saveCores = '1', self.arguments.num_cores
+       super().run(currentState)
+       self.arguments.num_cores = saveCores
 
 
 @ciRunner.register("define_visits", index_command := index_command + 1)
@@ -61,9 +79,9 @@ class ImsimDefineVisits(DefineVisits):
 
     # TODO: Remove when DM-30607 is fixed
     def run(self, currentState: BuildState):
-        self.arguments.num_cores, saveCores = '1', self.arguments.num_cores
-        super().run(currentState)
-        self.arguments.num_cores = saveCores
+       self.arguments.num_cores, saveCores = '1', self.arguments.num_cores
+       super().run(currentState)
+       self.arguments.num_cores = saveCores
 
 
 @ciRunner.register("import_external", index_command := index_command + 1)
@@ -88,7 +106,7 @@ class QgraphCommand(BaseCommand):
         args = (
             "--long-log",
             "qgraph",
-            "-d", "skymap='discrete/ci_imsim/4k' AND tract=0 AND patch=24",
+            "-d", f"skymap='{SKYMAP_PREFIX}{skymap_suffix}' AND tract=0 AND patch={patch}",
             "-b", self.runner.RunDir,
             "--input", INPUTCOL,
             "--output", COLLECTION,

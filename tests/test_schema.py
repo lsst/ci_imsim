@@ -28,6 +28,9 @@ import lsst.utils.tests
 
 from lsst.utils import getPackageDir
 
+butler = Butler(f'{os.environ["CI_IMSIM_DIR"]}/DATA', collections=['LSSTCam-imSim/runs/ci_imsim'])
+skymap = list(butler.registry.queryDatasets(datasetType='objectTable_tract'))[0].dataId['skymap']
+
 
 class TestSchemaMatch(lsst.utils.tests.TestCase):
     """Check the schema of the parquet outputs match the DDL in sdm_schemas"""
@@ -67,7 +70,7 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
 
     def testObjectSchemaMatch(self):
         """Check objectTable_tract"""
-        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": skymap}
         self._validateSchema("objectTable_tract", dataId, "Object")
 
     def testSourceSchemaMatch(self):
@@ -77,32 +80,32 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
 
     def testForcedSourceSchemaMatch(self):
         """Check forcedSourceTable_tract"""
-        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": skymap}
         self._validateSchema("forcedSourceTable_tract", dataId, "ForcedSource")
 
     def testDiaObjectSchemaMatch(self):
         """Check diaObjectTable_tract"""
-        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": skymap}
         self._validateSchema("diaObjectTable_tract", dataId, "DiaObject")
 
     def testDiaSourceSchemaMatch(self):
         """Check one diaSourceTable_tract"""
-        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": skymap}
         self._validateSchema("diaSourceTable_tract", dataId, "DiaSource")
 
     def testForcedSourceeOnDiaObjectSchemaMatch(self):
         """Check forcedSourceOnDiaObjectTable_tract"""
-        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": skymap}
         self._validateSchema("forcedSourceOnDiaObjectTable_tract", dataId, "ForcedSourceOnDiaObject")
 
     def testMatchRefSchemaMatch(self):
         """Check match_ref_truth_summary_objectTable_tract"""
-        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": skymap}
         self._validateSchema("match_ref_truth_summary_objectTable_tract", dataId, "MatchesTruth")
 
     def testMatchObjectSchemaMatch(self):
         """Check match_target_truth_summary_objectTable_tract"""
-        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": "discrete/ci_imsim/4k"}
+        dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": skymap}
         self._validateSchema("match_target_truth_summary_objectTable_tract", dataId, "MatchesObject")
 
 
