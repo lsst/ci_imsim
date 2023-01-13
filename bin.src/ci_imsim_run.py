@@ -65,23 +65,11 @@ class RegisterSkyMapSmall(RegisterSkyMap):
 class ImsimIngestRaws(IngestRaws):
     rawLocation = os.path.join(TESTDATA_DIR, "raw")
 
-    # TODO: Remove when DM-30607 is fixed (needed for MacOS only)
-    def run(self, currentState: BuildState):
-       self.arguments.num_cores, saveCores = '1', self.arguments.num_cores
-       super().run(currentState)
-       self.arguments.num_cores = saveCores
-
 
 @ciRunner.register("define_visits", index_command := index_command + 1)
 class ImsimDefineVisits(DefineVisits):
     instrumentName = INSTRUMENT_NAME
     collectionsName = f"{INSTRUMENT_NAME}/raw/all"
-
-    # TODO: Remove when DM-30607 is fixed
-    def run(self, currentState: BuildState):
-       self.arguments.num_cores, saveCores = '1', self.arguments.num_cores
-       super().run(currentState)
-       self.arguments.num_cores = saveCores
 
 
 @ciRunner.register("import_external", index_command := index_command + 1)
