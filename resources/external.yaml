@@ -746,6 +746,18 @@ data:
       tract: 0
     path: truth_summary/3828/truth_summary_3828_DC2_2_2i_truth_summary.parq
     formatter: lsst.daf.butler.formatters.parquet.ParquetFormatter
+- type: dataset
+  dataset_type: truth_summary
+  run: LSSTCam-imSim/truth_summary
+  records:
+  # this is the exact same truth_summary as above but ingested for 2k skymap
+  - dataset_id:
+    - !uuid '0e980a30-009f-465c-90d1-f0e41e763878'
+    data_id:
+    - skymap: discrete/ci_imsim/2k
+      tract: 0
+    path: truth_summary/3828/truth_summary_3828_DC2_2_2i_truth_summary.parq
+    formatter: lsst.daf.butler.formatters.parquet.ParquetFormatter
 - type: dataset_type
   name: cosmodc2_1_1_4_redmapper_v0_8_1_redgals
   dimensions: []
