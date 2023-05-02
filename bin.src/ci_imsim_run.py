@@ -85,10 +85,10 @@ class ImsimBaseButlerImport(ButlerImport):
 class QgraphCommand(BaseCommand):
     @classmethod
     def addArgs(cls, parser: ArgumentParser):
-        parser.add_argument("--config-limit-deblend", dest="limit_deblend", action="store_true",
-                            help="Whether to enable useCiLimits for deblending")
+        parser.add_argument("--config-no-limit-deblend", dest="no_limit_deblend", action="store_true",
+                            help="Whether to disable useCiLimits for deblending and process all blends")
         parser.add_argument("--config-process-singles", dest="process_singles", action="store_true",
-                            help="Whether to enable processSingles for deblending")
+                            help="Whether to enable processSingles (isolated objects) for deblending")
 
     def run(self, currentState: BuildState):
         args = (
@@ -101,9 +101,9 @@ class QgraphCommand(BaseCommand):
             "-p", "$DRP_PIPE_DIR/pipelines/LSSTCam-imSim/DRP-ci_imsim.yaml",
             "--skip-existing",
             "--save-qgraph", os.path.join(self.runner.RunDir, QGRAPH_FILE),
-            "--config", f"deblend:multibandDeblend.useCiLimits={self.arguments.limit_deblend}",
-            "--config", f"calibrate:deblend.useCiLimits={self.arguments.limit_deblend}",
+            "--config", f"calibrate:deblend.useCiLimits={not self.arguments.no_limit_deblend}",
             "--config", f"deblend:multibandDeblend.processSingles={self.arguments.process_singles}",
+            "--config", f"deblend:multibandDeblend.useCiLimits={not self.arguments.no_limit_deblend}",
         )
         pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
         subprocess.run(pipetask, check=True)
