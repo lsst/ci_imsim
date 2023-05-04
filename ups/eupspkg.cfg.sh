@@ -8,7 +8,7 @@ config(){
 }
 
 build(){
-    $CI_BUILDER_DIR/bin/sip_safe_python.sh bin/ci_imsim_run.py --config-limit-deblend -j $NJOBS
+    $CI_BUILDER_DIR/bin/sip_safe_python.sh bin/ci_imsim_run.py -j $NJOBS
 }
 
 install() {
