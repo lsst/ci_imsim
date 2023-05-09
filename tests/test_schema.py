@@ -62,7 +62,8 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
                        "long": "int64",
                        "float": "float32",
                        "double": "float64",
-                       "char": "object"}
+                       "char": "object",
+                       "timestamp": "datetime64[ns]"}
         for column in outputColumnNames:
             self.assertEqual(df.dtypes.get(column).name,
                              typeMapping[expectedColumns[column]],
