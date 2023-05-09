@@ -135,6 +135,7 @@ class HipsQgraphCommand(BaseCommand):
             "-b", self.runner.RunDir,
             "-p", "$CI_IMSIM_DIR/resources/highres_hips.yaml",
             "-i", COLLECTION,
+            "--output", HIPS_COLLECTION,
             "--pixels", str(33),
             "-q", os.path.join(self.runner.RunDir, HIPS_QGRAPH_FILE)
         )
