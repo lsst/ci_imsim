@@ -19,12 +19,12 @@ Running Tests
 
 To run this package locally:
 
-1) clone and setup ci_builder from https://github.com/lsst-dm/ci_builder
-2) clone this package
-3) setup this package
-4) From the root of the package directory run ``bin/rewrite.sh`` to
-   rewrite python shebang lines
-5) run ``bin/ci_imsim_run.py`` (see available options with ``--help``)
+1) Clone this package, `ci_builder <https://github.com/lsst-dm/ci_builder>`_, and `testdata_ci_imsim <https://github.com/lsst-dm/testdata_ci_imsim>`_.
+2) ``setup -r ci_builder``
+3) ``setup -kr testdata_ci_imsim``
+4) ``setup -kr ci_imsim``
+5) From the root of this package directory run ``bin/rewrite.sh`` to rewrite python shebang lines.
+6) Run ``bin/ci_imsim_run.py`` (see available options with ``--help``).
 
 To cleanup after a run, use either ``bin/ci_imsim_run.py --clean`` or ``rm -rf DATA/``.
 
