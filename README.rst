@@ -42,10 +42,3 @@ The provided ``resources/external.yaml`` can be re-generated using e.g.
 "2.2i/defaults/ci_imsim"``. Some of the generated paths may need to be
 modified to match their paths in ``testdata_ci_imsim``.
 
-Batch Submission
-================
-
-An example batch submission script for the ``ctrl_bps`` is provided in
-``examples``. To use it, run ``bin/ci_imsim_run.py import_external``
-to set up the repo without running the pipeline, then run
-``bps submit examples/pipelines_bps.yaml``.
