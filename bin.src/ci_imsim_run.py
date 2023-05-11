@@ -1,7 +1,6 @@
 from argparse import ArgumentParser
 import os
 import subprocess
-import sys
 
 from lsst.ci.builder import CommandRunner, BuildState, BaseCommand
 from lsst.ci.builder.commands import (CreateButler, RegisterInstrument, WriteCuratedCalibrations,
@@ -16,22 +15,6 @@ COLLECTION = f"{INSTRUMENT_NAME}/runs/ci_imsim"
 HIPS_QGRAPH_FILE = "hips.qgraph"
 HIPS_COLLECTION = f"{INSTRUMENT_NAME}/runs/ci_imsim_hips"
 SKYMAP_PREFIX = 'discrete/ci_imsim/'
-
-parser = ArgumentParser(
-    prog='ci_imsim',
-    description='Run ci_imsim on testdata_ci_imsim data',
-)
-parser.add_argument(
-    '--use_skymap_small',
-    action='store_true',
-    help='Use a smaller 2k x 2k pixel patch skymap instead of 4k^2 default'
-)
-args, args_left = parser.parse_known_args()
-sys.argv = sys.argv[:1] + args_left
-
-skymap_suffix = '2k' if args.use_skymap_small else '4k'
-# center patch: 7x7=49, (49-1)/2 = 24; 13x13 = 169, (169-1)/2 = 84
-patch = 84 if args.use_skymap_small else 24
 
 index_command = 0
 
@@ -58,6 +41,7 @@ class RegisterSkyMapSmall(RegisterSkyMap):
 
     @classmethod
     def addArgs(cls, parser: ArgumentParser):
+        # Pass to avoid re-setting args from the first RegisterSkyMap command
         pass
 
 
@@ -89,8 +73,14 @@ class QgraphCommand(BaseCommand):
                             help="Whether to disable useCiLimits for deblending and process all blends")
         parser.add_argument("--config-process-singles", dest="process_singles", action="store_true",
                             help="Whether to enable processSingles (isolated objects) for deblending")
+        parser.add_argument("--config-use-skymap-small", dest="use_skymap_small", action="store_true",
+                            help="Use a smaller 2k x 2k pixel patch skymap instead of 4k^2 default")
 
     def run(self, currentState: BuildState):
+        skymap_suffix = '2k' if self.arguments.use_skymap_small else '4k'
+        # center patch: 7x7=49, (49-1)/2 = 24; 13x13 = 169, (169-1)/2 = 84
+        patch = 84 if self.arguments.use_skymap_small else 24
+
         args = (
             "--long-log",
             "qgraph",
