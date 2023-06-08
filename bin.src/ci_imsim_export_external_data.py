@@ -2,7 +2,6 @@ import os.path
 import argparse
 import logging
 
-import lsst.log
 from lsst.daf.butler import Butler, FileDataset
 
 if __name__ == "__main__":
@@ -23,18 +22,15 @@ if __name__ == "__main__":
         help="Collections to search for; default ellipsis (...)"
     )
     parser.add_argument("-v", "--verbose", action="store_const", dest="logLevel",
-                        default=lsst.log.Log.INFO, const=lsst.log.Log.DEBUG,
+                        default=logging.INFO, const=logging.DEBUG,
                         help="Set the log level to DEBUG.")
 
     args = parser.parse_args()
-    log = lsst.log.Log.getLogger("lsst.daf.butler")
-    log.setLevel(args.logLevel)
     collections = args.collections.split(',')
 
-    # Forward python logging to lsst logger
+    logging.basicConfig(level=logging.INFO)
     lgr = logging.getLogger("lsst.daf.butler")
-    lgr.setLevel(logging.INFO if args.logLevel == lsst.log.Log.INFO else logging.DEBUG)
-    lgr.addHandler(lsst.log.LogHandler())
+    lgr.setLevel(args.logLevel)
 
     butler = Butler(
         args.root,
