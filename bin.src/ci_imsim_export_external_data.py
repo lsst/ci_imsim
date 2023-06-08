@@ -26,7 +26,12 @@ if __name__ == "__main__":
                         help="Set the log level to DEBUG.")
 
     args = parser.parse_args()
-    collections = args.collections.split(',')
+
+    collections = args.collections
+    if collections == "...":
+        collections = ...
+    else:
+        collections = collections.split(',')
 
     logging.basicConfig(level=logging.INFO)
     lgr = logging.getLogger("lsst.daf.butler")
@@ -68,5 +73,5 @@ if __name__ == "__main__":
             export.saveDatasets(butler.registry.queryDatasets(datasetTypeName, collections=collections),
                                 elements=(), rewrite=rewrite)
         for flattenChains in (True, False):
-            for collection in butler.registry.queryCollections(args.collections, flattenChains=flattenChains):
+            for collection in butler.registry.queryCollections(collections, flattenChains=flattenChains):
                 export.saveCollection(collection)
