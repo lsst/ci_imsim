@@ -48,10 +48,11 @@ class TestHipsOutputs(unittest.TestCase):
             # There are 90 HiPS images for each band.
             self.assertEqual(len(datasets), 90)
 
+            stored = self.butler.stored_many(datasets)
             for dataset in datasets:
-                self.assertTrue(self.butler.datastore.exists(dataset), msg="File exists for deepCoadd_hpx")
+                self.assertTrue(stored[dataset], msg="File exists for deepCoadd_hpx")
 
-            exp = self.butler.getDirect(list(datasets)[0])
+            exp = self.butler.get(list(datasets)[0])
 
             self.assertEqual(exp.wcs.getFitsMetadata()["CTYPE1"], "RA---HPX")
             self.assertEqual(exp.wcs.getFitsMetadata()["CTYPE2"], "DEC--HPX")
