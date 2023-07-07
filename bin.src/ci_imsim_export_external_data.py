@@ -49,14 +49,19 @@ if __name__ == "__main__":
         ],
     )
 
+    datastore_roots = butler.get_datastore_roots()
+    assert len(datastore_roots) == 1, "Export script requires a FileDatastore, not ChainedDatastore"
+    datastore_root = list(datastore_roots.values())[0]
+    assert datastore_root.schema == "file", "Export assumes POSIX datastore."
+
     def rewrite(dataset: FileDataset) -> FileDataset:
         # Join the datastore root to the exported path.  This should yield
         # absolute paths that start with $CI_IMSIM_DIR.
-        dataset.path = os.path.join(butler.datastore.root.ospath, dataset.path)
+        abspath = datastore_root.join(dataset.path)
         # Remove symlinks in the path; this should result in absolute paths
         # that start with $TESTDATA_CI_IMSIM_DIR, because ci_imsim always
         # symlinks these datasets from there.
-        dataset.path = os.path.realpath(dataset.path)
+        dataset.path = os.path.realpath(abspath.ospath)
         return dataset
 
     with butler.export(filename=args.filename) as export:
