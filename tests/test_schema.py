@@ -23,6 +23,11 @@ import os
 import unittest
 import yaml
 
+# These three imports are to check the pandas version.
+import importlib.metadata
+import pandas  # noqa: F401
+import packaging.version
+
 from lsst.daf.butler import Butler
 import lsst.utils.tests
 
@@ -56,14 +61,18 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
         outputColumnNames = set(df.columns.to_list())
         self.assertEqual(outputColumnNames, set(expectedColumns.keys()), f"{info} failed")
 
-        # the data type mapping from felis datatype to pandas
+        # Pandas 2.1.0 changed the datetime dtype from [ns] -> [us],
+        # so we need a pandas version-aware test here.
+        pdVersion = packaging.version.parse(importlib.metadata.version("pandas"))
+        pdChanged = packaging.version.Version('2.1.0')
+        # Check the data type mapping from felis datatype to pandas.
         typeMapping = {"boolean": "bool",
                        "int": "int32",
                        "long": "int64",
                        "float": "float32",
                        "double": "float64",
                        "char": "object",
-                       "timestamp": "datetime64[ns]"}
+                       "timestamp": "datetime64[us]" if pdVersion >= pdChanged else "datetime64[ns]"}
         for column in outputColumnNames:
             self.assertEqual(df.dtypes.get(column).name,
                              typeMapping[expectedColumns[column]],
