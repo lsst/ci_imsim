@@ -28,46 +28,65 @@ import lsst.utils.tests
 
 from lsst.utils import getPackageDir
 
-butler = Butler(f'{os.environ["CI_IMSIM_DIR"]}/DATA', collections=['LSSTCam-imSim/runs/ci_imsim'])
-skymap = list(butler.registry.queryDatasets(datasetType='objectTable_tract'))[0].dataId['skymap']
+butler = Butler(
+    f'{os.environ["CI_IMSIM_DIR"]}/DATA', collections=["LSSTCam-imSim/runs/ci_imsim"]
+)
+skymap = list(butler.registry.queryDatasets(datasetType="objectTable_tract"))[0].dataId[
+    "skymap"
+]
 
 
 class TestSchemaMatch(lsst.utils.tests.TestCase):
     """Check the schema of the parquet outputs match the DDL in sdm_schemas"""
 
     def setUp(self):
-        self.butler = Butler(os.path.join(getPackageDir("ci_imsim"), "DATA"),
-                             writeable=False, collections=["LSSTCam-imSim/runs/ci_imsim"])
-        schemaFile = os.path.join(getPackageDir("sdm_schemas"), 'yml', 'imsim.yaml')
+        self.butler = Butler(
+            os.path.join(getPackageDir("ci_imsim"), "DATA"),
+            writeable=False,
+            collections=["LSSTCam-imSim/runs/ci_imsim"],
+        )
+        schemaFile = os.path.join(getPackageDir("sdm_schemas"), "yml", "imsim.yaml")
         with open(schemaFile, "r") as f:
-            self.schema = yaml.safe_load(f)['tables']
+            self.schema = yaml.safe_load(f)["tables"]
 
     def _validateSchema(self, dataset, dataId, tableName):
         """Check column name and data type match between dataset and DDL"""
         info = f"dataset={dataset} tableName={tableName} dataId={dataId}"
 
-        sdmSchema = [table for table in self.schema if table['name'] == tableName]
+        sdmSchema = [table for table in self.schema if table["name"] == tableName]
         self.assertEqual(len(sdmSchema), 1)
-        expectedColumns = {column['name']: column['datatype']
-                           for column in sdmSchema[0]['columns']}
+        expectedColumns = {
+            column["name"]: column["datatype"] for column in sdmSchema[0]["columns"]
+        }
 
-        df = self.butler.get(dataset, dataId)
+        df = self.butler.get(dataset, dataId, storageClass="DataFrame")
         df.reset_index(inplace=True)
-        outputColumnNames = set(df.columns.to_list())
-        self.assertEqual(outputColumnNames, set(expectedColumns.keys()), f"{info} failed")
+
+        outputColumnNames = df.columns.to_list()
+        if "index" in outputColumnNames:
+            outputColumnNames.remove("index")
+        if "index" in expectedColumns:
+            expectedColumns.pop("index")
+        self.assertEqual(
+            set(outputColumnNames), set(expectedColumns.keys()), f"{info} failed"
+        )
 
         # the data type mapping from felis datatype to pandas
-        typeMapping = {"boolean": "bool",
-                       "int": "int32",
-                       "long": "int64",
-                       "float": "float32",
-                       "double": "float64",
-                       "char": "object",
-                       "timestamp": "datetime64[ns]"}
+        typeMapping = {
+            "boolean": "bool",
+            "int": "int32",
+            "long": "int64",
+            "float": "float32",
+            "double": "float64",
+            "char": "object",
+            "timestamp": "datetime64[ns]",
+        }
         for column in outputColumnNames:
-            self.assertEqual(df.dtypes.get(column).name,
-                             typeMapping[expectedColumns[column]],
-                             f"{info} column={column} failed")
+            self.assertEqual(
+                df.dtypes.get(column).name,
+                typeMapping[expectedColumns[column]],
+                f"{info} column={column} failed",
+            )
 
     def testObjectSchemaMatch(self):
         """Check objectTable_tract"""
@@ -76,7 +95,12 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
 
     def testSourceSchemaMatch(self):
         """Check one sourceTable_visit"""
-        dataId = {"instrument": "LSSTCam-imSim", "detector": 100, "visit": 5884, "band": "y"}
+        dataId = {
+            "instrument": "LSSTCam-imSim",
+            "detector": 100,
+            "visit": 5884,
+            "band": "y",
+        }
         self._validateSchema("sourceTable_visit", dataId, "Source")
 
     def testForcedSourceSchemaMatch(self):
@@ -97,17 +121,23 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
     def testForcedSourceeOnDiaObjectSchemaMatch(self):
         """Check forcedSourceOnDiaObjectTable_tract"""
         dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": skymap}
-        self._validateSchema("forcedSourceOnDiaObjectTable_tract", dataId, "ForcedSourceOnDiaObject")
+        self._validateSchema(
+            "forcedSourceOnDiaObjectTable_tract", dataId, "ForcedSourceOnDiaObject"
+        )
 
     def testMatchRefSchemaMatch(self):
         """Check match_ref_truth_summary_objectTable_tract"""
         dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": skymap}
-        self._validateSchema("match_ref_truth_summary_objectTable_tract", dataId, "MatchesTruth")
+        self._validateSchema(
+            "match_ref_truth_summary_objectTable_tract", dataId, "MatchesTruth"
+        )
 
     def testMatchObjectSchemaMatch(self):
         """Check match_target_truth_summary_objectTable_tract"""
         dataId = {"instrument": "LSSTCam-imSim", "tract": 0, "skymap": skymap}
-        self._validateSchema("match_target_truth_summary_objectTable_tract", dataId, "MatchesObject")
+        self._validateSchema(
+            "match_target_truth_summary_objectTable_tract", dataId, "MatchesObject"
+        )
 
 
 if __name__ == "__main__":
