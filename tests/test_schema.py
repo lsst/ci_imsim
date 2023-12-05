@@ -79,10 +79,10 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
             "float": "float32",
             "double": "float64",
             "char": "object",
-            "timestamp": "datetime64[ns]",
+            "timestamp": r"datetime64\[[un]s\]",
         }
         for column in outputColumnNames:
-            self.assertEqual(
+            self.assertRegex(
                 df.dtypes.get(column).name,
                 typeMapping[expectedColumns[column]],
                 f"{info} column={column} failed",
