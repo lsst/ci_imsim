@@ -74,6 +74,7 @@ class TestSchemaMatch(lsst.utils.tests.TestCase):
         # the data type mapping from felis datatype to pandas
         typeMapping = {
             "boolean": "^bool$",
+            "short": "^int16$",
             "int": "^int32$",
             "long": "^int64$",
             "float": "^float32$",
