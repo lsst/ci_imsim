@@ -65,6 +65,15 @@ class ImsimBaseButlerImport(ButlerImport):
         return os.path.join(self.runner.pkgRoot, "resources", "external.yaml")
 
 
+@ciRunner.register("import_external_pretrained_models", index_command := index_command + 1)
+class ImsimButlerImportPretrainedModels(ButlerImport):
+    dataLocation = TESTDATA_DIR
+
+    @property
+    def importFileLocation(self) -> str:
+        return os.path.join(self.runner.pkgRoot, "resources", "external_pretrained_models.yaml")
+
+
 @ciRunner.register("qgraph", index_command := index_command + 1)
 class QgraphCommand(BaseCommand):
     @classmethod
