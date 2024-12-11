@@ -56,6 +56,15 @@ class ImsimDefineVisits(DefineVisits):
     collectionsName = f"{INSTRUMENT_NAME}/raw/all"
 
 
+@ciRunner.register("import_external_pretrained_models", index_command := index_command + 1)
+class ImsimButlerImportPretrainedModels(ButlerImport):
+    dataLocation = TESTDATA_DIR
+
+    @property
+    def importFileLocation(self) -> str:
+        return os.path.join(self.runner.pkgRoot, "resources", "external_pretrained_models.yaml")
+
+
 @ciRunner.register("import_external", index_command := index_command + 1)
 class ImsimBaseButlerImport(ButlerImport):
     dataLocation = TESTDATA_DIR
