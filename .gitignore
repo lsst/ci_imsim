@@ -28,3 +28,4 @@ DATA*
 # IDEs, etc.
 .idea/
 .vscode/
+python/*.dist-info/
