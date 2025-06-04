@@ -1,0 +1,59 @@
+description: Butler Data Repository Export
+version: 1.0.2
+universe_version: 7
+universe_namespace: daf_butler
+data:
+- type: collection
+  collection_type: RUN
+  name: photoz_models
+  host: null
+  timespan_begin: null
+  timespan_end: null
+- type: dataset_type
+  name: pzModel_bpz
+  dimensions:
+  - instrument
+  storage_class: PZModel
+  is_calibration: true
+- type: dataset
+  dataset_type: pzModel_bpz
+  run: photoz_models
+  records:
+  - dataset_id:
+    - !uuid '9b5d54f6-7ceb-4c95-93f3-62c9ec80d2d9'
+    data_id:
+    - instrument: LSSTCam-imSim
+    path: photoz_models/pzModel_bpz/pzModel_bpz_LSSTCam-imSim.pickle
+    formatter: lsst.meas.pz.model_formatter.ModelFormatter
+- type: dataset_type
+  name: pzModel_knn
+  dimensions:
+  - instrument
+  storage_class: PZModel
+  is_calibration: true
+- type: dataset
+  dataset_type: pzModel_knn
+  run: photoz_models
+  records:
+  - dataset_id:
+    - !uuid '88e5ffe1-590a-46e0-9750-ecaed4173d08'
+    data_id:
+    - instrument: LSSTCam-imSim
+    path: photoz_models/pzModel_knn/pzModel_knn_LSSTCam-imSim.pickle
+    formatter: lsst.meas.pz.model_formatter.ModelFormatter
+- type: dataset_type
+  name: pzModel_trainz
+  dimensions:
+  - instrument
+  storage_class: PZModel
+  is_calibration: true
+- type: dataset
+  dataset_type: pzModel_trainz
+  run: photoz_models
+  records:
+  - dataset_id:
+    - !uuid '689fd079-c137-4918-80fa-ecad9a8f9600'
+    data_id:
+    - instrument: LSSTCam-imSim
+    path: photoz_models/pzModel_trainz/pzModel_trainz_LSSTCam-imSim.pickle
+    formatter: lsst.meas.pz.model_formatter.ModelFormatter
