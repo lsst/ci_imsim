@@ -12,7 +12,6 @@ INSTRUMENT_NAME = "LSSTCam-imSim"
 QGRAPH_FILE = "DRP.qgraph"
 INPUTCOL = f"{INSTRUMENT_NAME}/defaults"
 COLLECTION = f"{INSTRUMENT_NAME}/runs/ci_imsim"
-HIPS_QGRAPH_FILE = "hips.qgraph"
 HIPS_COLLECTION = f"{INSTRUMENT_NAME}/runs/ci_imsim_hips"
 SKYMAP_PREFIX = 'discrete/ci_imsim/'
 
@@ -126,39 +125,7 @@ class ProcessingCommand(BaseCommand):
         subprocess.run(pipetask, check=True)
 
 
-@ciRunner.register("hips_qgraph", index_command := index_command + 1)
-class HipsQgraphCommand(BaseCommand):
-    def run(self, currentState: BuildState):
-        args = (
-            "build",
-            "-b", self.runner.RunDir,
-            "-p", "$CI_IMSIM_DIR/resources/highres_hips.yaml",
-            "-i", COLLECTION,
-            "--output", HIPS_COLLECTION,
-            "--pixels", str(33),
-            "-q", os.path.join(self.runner.RunDir, HIPS_QGRAPH_FILE)
-        )
-        builder = self.runner.getExecutableCmd("PIPE_TASKS_DIR", "build-high-resolution-hips-qg", args)
-        subprocess.run(builder, check=True)
-
-
-@ciRunner.register("hips_process", index_command := index_command + 1)
-class HipsProcessCommand(BaseCommand):
-    def run(self, currentState: BuildState):
-        args = (
-            "--long-log",
-            "run",
-            "-j", str(self.arguments.num_cores),
-            "-b", self.runner.RunDir,
-            "--output", HIPS_COLLECTION,
-            "--register-dataset-types",
-            "-g", HIPS_QGRAPH_FILE
-        )
-        pipetask = self.runner.getExecutableCmd("CTRL_MPEXEC_DIR", "pipetask", args)
-        subprocess.run(pipetask, check=True)
-
-
-@ciRunner.register("hips_generate", index_command := index_command + 1)
+@ciRunner.register("hips", index_command := index_command + 1)
 class HipsGenerateCommand(BaseCommand):
     def run(self, currentState: BuildState):
         hipsDir = os.path.join(self.runner.RunDir, "hips")
@@ -167,9 +134,9 @@ class HipsGenerateCommand(BaseCommand):
             "run",
             "-j", str(self.arguments.num_cores),
             "-b", self.runner.RunDir,
-            "-i", HIPS_COLLECTION,
+            "-i", COLLECTION,
             "--output", HIPS_COLLECTION,
-            "-p", "$CI_IMSIM_DIR/resources/gen_hips.yaml",
+            "-p", "$CI_IMSIM_DIR/resources/hips.yaml",
             "-c", "generateHips:hips_base_uri="+hipsDir,
             "-c", "generateColorHips:hips_base_uri="+hipsDir,
             "--register-dataset-types"
