@@ -9,7 +9,7 @@ from lsst.ci.builder.commands import (CreateButler, RegisterInstrument, WriteCur
 
 TESTDATA_DIR = os.environ['TESTDATA_CI_IMSIM_DIR']
 INSTRUMENT_NAME = "LSSTCam-imSim"
-QGRAPH_FILE = "DRP.qgraph"
+QGRAPH_FILE = "DRP.qg"
 INPUTCOL = f"{INSTRUMENT_NAME}/defaults"
 COLLECTION = f"{INSTRUMENT_NAME}/runs/ci_imsim"
 HIPS_COLLECTION = f"{INSTRUMENT_NAME}/runs/ci_imsim_hips"
