@@ -45,8 +45,8 @@ class TestHipsOutputs(unittest.TestCase):
         for band in self._bands:
             datasets = set(self.butler.registry.queryDatasets("deepCoadd_hpx", band=band))
 
-            # There are 90 HiPS images for each band.
-            self.assertEqual(len(datasets), 90)
+            # There are 81 HiPS images for each band.
+            self.assertEqual(len(datasets), 81)
 
             stored = self.butler.stored_many(datasets)
             for dataset in datasets:
