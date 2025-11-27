@@ -20,7 +20,7 @@ Running Tests
 To run this package locally:
 
 1) Clone this package, `ci_builder <https://github.com/lsst-dm/ci_builder>`_, and 
-`testdata_ci_imsim <https://github.com/lsst-dm/testdata_ci_imsim>`_.
+`testdata_ci_imsim <https://github.com/lsst/testdata_ci_imsim>`_.
 2) ``setup -r ci_builder``
 3) ``setup -kr testdata_ci_imsim``
 4) ``setup -kr ci_imsim``
