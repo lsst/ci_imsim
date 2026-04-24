@@ -63,7 +63,7 @@ data:
   - LSSTCam-imSim/refcats
   - LSSTCam-imSim/truth_summary
   - LSSTCam-imSim/red_galaxies_cosmodc2
-  - pretrained_models/tac_cnn_lsstcam_2026-02-13
+  - pretrained_models/tac_cnn_lsstcam_2026-02-26
 - type: dataset_type
   name: bias
   dimensions:
